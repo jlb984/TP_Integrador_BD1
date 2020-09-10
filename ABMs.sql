@@ -70,30 +70,6 @@ call abm_tarea(6,"Otro 2","222222222222222 y 2","mod");
 call abm_tarea(6,"","","baja");		
 		
 
--- ****************** ABM estacion_trabajo ***************************--
-  
-  DELIMITER |
-  
-  CREATE PROCEDURE abm_estacion_trabajo(IN _id_estacion int, IN _linea_id_linea int, IN _tarea_id_tarea int, IN _nombre varchar(50), IN accion varchar(10)) -- acciones posibles "alta", "baja", "mod"
-  BEGIN
-	CASE accion
-		WHEN "alta" THEN 
-			insert into estacion_trabajo values (_id_estacion, _linea_id_linea, _tarea_id_tarea, _nombre);
-		WHEN "baja" THEN
-			delete from estacion_trabajo WHERE id_estacion=_id_estacion;
-		WHEN "mod" THEN -- En este caso solo se puede modificar la columna que no es clave (nombre_estacion), cualquier otro intento dara error
-			update estacion_trabajo set
-			nombre_estacion=_nombre where id_estacion=_id_estacion;
-	END CASE;
-	select * from estacion_trabajo;
-END
-|
-
-
-call abm_estacion_trabajo(11,1,1,"Prueba de Alta", "alta");		
-call abm_estacion_trabajo(11,1,2,"Pruba de Modificacion", "mod");
-call abm_estacion_trabajo(11,0,0,"","baja");		
-
 
 -- ****************** ABM proveedor ***************************--
   
@@ -145,29 +121,7 @@ call abm_insumo(39,"IIIIOOOO2020","Prueba de alta","alta");
 call abm_insumo(39,"Otro 2","Prueba de Mod","mod");
 call abm_insumo(39,"","","baja");		
 		
--- ****************** ABM estacion_insumo ***************************--
-  
-  DELIMITER |
-  
-  CREATE PROCEDURE abm_estacion_insumo(IN _estacion_id_estacion int, IN _insumo_id_insumo int, IN _cantidad int, IN accion varchar(10)) -- acciones posibles "alta", "baja", "mod"
-  BEGIN
-	CASE accion
-		WHEN "alta" THEN 
-			insert into estacion_insumo values (_estacion_id_estacion, _insumo_id_insumo, _cantidad);
-		WHEN "baja" THEN
-			delete from estacion_insumo WHERE estacion_id_estacion=_estacion_id_estacion and insumo_id_insumo=_insumo_id_insumo;
-		WHEN "mod" THEN -- En este caso solo se puede modificar la columna que no es clave (cantidad), cualquier otro intento dara error
-			update estacion_insumo set
-			cantidad=_cantidad where estacion_id_estacion=_estacion_id_estacion and insumo_id_insumo=_insumo_id_insumo;
-	END CASE;
-	select * from estacion_insumo;
-END
-|
 
-
-call abm_estacion_insumo(10,1,1,"alta");		
-call abm_estacion_insumo(10,1,333333, "mod");
-call abm_estacion_insumo(10,1,0,"baja");		
 
 -- ****************** ABM concesionaria ***************************--
   
@@ -250,30 +204,6 @@ call abm_vehiculo(25,1,2,"mod");
 call abm_vehiculo(25,0,0,"baja");		
 
 
--- ****************** ABM pedido_del_modelo ***************************--
-  
-  DELIMITER |
-  
-  CREATE PROCEDURE abm_pedido_del_modelo(IN _pedido_id_pedido int, IN _modelo_id_modelo int, IN _cantidad int, IN accion varchar(10)) -- acciones posibles "alta", "baja", "mod"
-  BEGIN
-	CASE accion
-		WHEN "alta" THEN 
-			insert into pedido_del_modelo values (_pedido_id_pedido, _modelo_id_modelo, _cantidad);
-		WHEN "baja" THEN
-			delete from pedido_del_modelo WHERE pedido_id_pedido=_pedido_id_pedido;
-		WHEN "mod" THEN -- En este caso solo se puede modificar la columna que no es clave (cantidad), cualquier otro intento dara error
-			update pedido_del_modelo set
-			cantidad=_cantidad where pedido_id_pedido=_pedido_id_pedido;
-	END CASE;
-	select * from pedido_del_modelo;
-END
-|
-
-
-call abm_pedido_del_modelo(4,1,1,"alta");		
-call abm_pedido_del_modelo(4,1,10, "mod");
-call abm_pedido_del_modelo(4,0,0,"baja");		
-
 
 -- ****************** ABM estacion_vehiculo ***************************--
   
@@ -302,26 +232,3 @@ call abm_estacion_vehiculo(15,3,'2013-11-24 17:15:10','2013-11-24 20:15:10',"baj
 
 
 
--- ****************** ABM proveedor_detalle_insumo ***************************--
-  
-  DELIMITER |
-  
-  CREATE PROCEDURE abm_proveedor_detalle_insumo(IN _proveedor_cuit int, IN _insumo_id_insumo int, IN _precio int, IN accion varchar(10)) -- acciones posibles "alta", "baja", "mod"
-  BEGIN
-	CASE accion
-		WHEN "alta" THEN 
-			insert into proveedor_detalle_insumo values (_proveedor_cuit, _insumo_id_insumo, _precio);
-		WHEN "baja" THEN
-			delete from proveedor_detalle_insumo WHERE proveedor_cuit=_proveedor_cuit and insumo_id_insumo=_insumo_id_insumo;
-		WHEN "mod" THEN -- En este caso solo se puede modificar la columna que no es clave (precio), cualquier otro intento dara error
-			update proveedor_detalle_insumo set
-			precio=_precio where proveedor_cuit=_proveedor_cuit and insumo_id_insumo=_insumo_id_insumo;
-	END CASE;
-	select * from proveedor_detalle_insumo;
-END
-|
-
-
-call abm_proveedor_detalle_insumo(111111111,10,500,"alta");		
-call abm_proveedor_detalle_insumo(111111111,10,22222, "mod");
-call abm_proveedor_detalle_insumo(111111111,10,0,"baja");		
