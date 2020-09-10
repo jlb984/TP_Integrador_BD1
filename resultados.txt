@@ -1,0 +1,175 @@
+
+111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+
+# mes, modelo, total_produccion
+'1', '1', '1'
+'3', '1', '1'
+'6', '1', '1'
+'6', '2', '1'
+'11', '2', '2'
+
+
+22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+
+
+# Mes, Modelo, concesionaria, Total_x_mes
+'7', 'Jonathan', 'Moliternos Cars', '3'
+'7', 'Luciano', 'Moliternos Cars', '3'
+'8', 'Jonathan', 'Brigstone', '3'
+'8', 'Luciano', 'Brigstone', '6'
+'9', 'Jonathan', 'Ford', '4'
+'9', 'Luciano', 'Ford', '5'
+
+
+333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+
+Escalada Motors	
+Moliternos Cars	6
+Brigstone	18
+Ford	27
+
+
+44444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+
+
+# id_modelo, nombre, descripcion
+'1', 'Jonathan', 'Sedan familiar de consumo masivo, opcional motores 1.2 y 1.4'
+'2', 'Luciano', 'Superdeportivo con velocidad maxima de 300 km/h, solo en color rojo'
+
+
+55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+
+
+# Num_Chasis, Modelo, ingreso
+'1', 'Jonathan', '2013-11-24 17:15:10'
+'2', 'Jonathan', '2014-04-24 17:15:10'
+'3', 'Jonathan', '2014-09-24 17:15:10'
+'8', 'Jonathan', '2016-06-24 17:15:10'
+'9', 'Jonathan', '2016-08-24 17:15:10'
+'4', 'Luciano', '2015-02-24 17:15:10'
+'5', 'Luciano', '2015-07-24 17:15:10'
+'6', 'Luciano', '2015-12-24 17:15:10'
+'11', 'Luciano', '2016-12-24 17:15:10'
+'12', 'Luciano', '2016-01-24 17:15:10'
+'13', 'Luciano', '2017-03-24 17:15:10'
+'14', 'Luciano', '2017-05-24 17:15:10'
+'15', 'Luciano', '2017-08-24 17:15:10'
+
+
+
+66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+
+
+# Num_Chasis, Modelo, Estado
+7, Jonathan, A fabricar
+10, Luciano, A fabricar
+11, Luciano, Chasis
+8, Jonathan, Pintura
+12, Luciano, Pintura
+13, Luciano, Pintura
+9, Jonathan, Tren delantero y trasero
+14, Luciano, Tren delantero y trasero
+15, Luciano, Tren delantero y trasero
+1, Jonathan, Terminado
+2, Jonathan, Terminado
+3, Jonathan, Terminado
+4, Luciano, Terminado
+5, Luciano, Terminado
+6, Luciano, Terminado
+
+
+
+77777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+
+# pedido, Num_Chasis, Modelo, Estado
+'1', '6', 'Luciano', 'Terminado'
+'1', '5', 'Luciano', 'Terminado'
+'1', '4', 'Luciano', 'Terminado'
+'1', '3', 'Jonathan', 'Terminado'
+'1', '2', 'Jonathan', 'Terminado'
+'1', '1', 'Jonathan', 'Terminado'
+'2', '15', 'Luciano', 'Tren delantero y trasero'
+'2', '14', 'Luciano', 'Tren delantero y trasero'
+'2', '9', 'Jonathan', 'Tren delantero y trasero'
+'2', '13', 'Luciano', 'Pintura'
+'2', '12', 'Luciano', 'Pintura'
+'2', '8', 'Jonathan', 'Pintura'
+'2', '11', 'Luciano', 'Chasis'
+'2', '10', 'Luciano', 'A fabricar'
+'2', '7', 'Jonathan', 'A fabricar'
+
+
+
+88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
+
+
+# nombre, nombre
+'Jonathan', 'Moliternos Cars'
+'Luciano', 'Moliternos Cars'
+
+
+
+# nombre, nombre
+'Jonathan', 'Brigstone'
+'Luciano', 'Brigstone'
+
+
+# nombre, nombre
+'Jonathan', 'Ford'
+'Luciano', 'Ford'
+
+
+99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+
+
+
+# insumo_id_insumo, total
+'1', '24'
+'2', '24'
+'3', '24'
+'4', '24'
+'9', '24'
+'10', '24'
+'11', '24'
+'12', '24'
+'16', '24'
+'17', '24'
+'18', '24'
+'19', '24'
+'24', '24'
+'25', '24'
+'26', '24'
+'27', '24'
+'31', '24'
+'32', '24'
+'33', '24'
+'34', '24'
+'5', '24'
+'6', '24'
+'7', '24'
+'8', '24'
+'9', '26'
+'13', '24'
+'14', '24'
+'15', '24'
+'20', '24'
+'21', '24'
+'22', '24'
+'23', '24'
+'24', '30'
+'28', '24'
+'29', '24'
+'30', '24'
+'35', '24'
+'36', '24'
+'37', '24'
+'38', '24'
+
+
+1010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010
+
+
+# pedido_id_pedido, modelo_id_modelo, cantidad
+'2', '1', '3'
+'2', '2', '6'
+

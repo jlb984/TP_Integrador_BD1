@@ -1,0 +1,197 @@
+create schema  if not exists Terminal_Automotriz;
+
+use Terminal_Automotriz;
+
+
+
+create table modelo (
+	
+id_modelo int not null primary key,
+    
+nombre varchar(50)  not null ,
+ 
+descripcion varchar(100)
+    
+);
+    
+
+create table linea_montaje (
+	
+id_linea int not null primary key,
+    
+modelo_id_modelo int not null,
+    
+foreign key (modelo_id_modelo) references modelo(id_modelo),
+    
+produccion_mes int
+    
+);
+    
+
+create table estacion_trabajo (
+	
+id_estacion int not null primary key,
+    
+linea_id_linea int not null,
+    
+foreign key (linea_id_linea) references linea_montaje(id_linea),
+    
+nombre_estacion char(50)
+    
+);
+    
+
+create table tarea (
+	
+id_tarea int not null primary key,
+    
+nombre char(50),
+    
+descripcion char(150)
+    
+);
+
+
+create table proveedor (
+	
+cuit int not null primary key,
+    
+nombre char(50),
+    
+descripcion char(100)
+    
+);
+    
+
+create table insumo (
+	
+id_insumo int not null primary key,
+    
+nombre char(50),
+    
+descripcion char(100),
+    
+precio int
+    
+);
+    
+
+create table tarea_estacion (
+	
+tarea_id_tarea int not null,
+    
+estacion_id_estacion int not null,
+    
+primary key (tarea_id_tarea, estacion_id_estacion),
+    
+foreign key (tarea_id_tarea) references tarea(id_tarea),
+    
+foreign key (estacion_id_estacion) references estacion_trabajo(id_estacion)
+    
+);
+    
+
+create table tarea_insumo (
+	
+tarea_id_tarea int not null,
+    
+insumo_id_insumo int not null,
+    
+primary key (tarea_id_tarea, insumo_id_insumo),
+    
+foreign key (tarea_id_tarea) references tarea(id_tarea),
+    
+foreign key (insumo_id_insumo) references insumo(id_insumo),
+    
+cantidad int
+    
+);
+    
+
+
+create table concesionaria (
+	
+id_concesionaria int not null primary key,
+    
+nombre char(50)
+    
+);
+    
+
+create table pedido (
+	
+id_pedido int not null primary key,
+    
+concesionaria_id_concesionaria int not null,
+    
+foreign key (concesionaria_id_concesionaria) references concesionaria(id_concesionaria),
+    
+fecha_entrega date
+
+);
+    
+
+create table vehiculo (
+	
+id_chasis int not null primary key,
+    
+modelo_id_modelo int not null,
+    
+foreign key (modelo_id_modelo) references modelo(id_modelo),
+    
+pedido_id_pedido int not null,
+    
+foreign key (pedido_id_pedido) references pedido(id_pedido)
+
+);
+
+
+create table pedido_del_modelo (
+	
+pedido_id_pedido int not null,
+    
+modelo_id_modelo int not null,
+    
+primary key (pedido_id_pedido, modelo_id_modelo),
+    
+foreign key (pedido_id_pedido) references pedido(id_pedido),
+    
+foreign key (modelo_id_modelo) references modelo(id_modelo),
+    
+cantidad int
+
+);
+    
+
+create table estacion_vehiculo (
+	
+vehiculo_id_chasis int not null,
+    
+estacion_trabajo_id_estacion int not null,
+    
+primary key (vehiculo_id_chasis, estacion_trabajo_id_estacion),
+    
+foreign key (vehiculo_id_chasis) references vehiculo(id_chasis),
+    
+foreign key (estacion_trabajo_id_estacion) references estacion_trabajo(id_estacion),
+    
+ingreso datetime,
+    
+egreso datetime
+    
+);
+    
+
+create table proveedor_detalle_insumo (
+	
+proveedor_id_proveedor int not null,
+    
+insumo_id_insumo int not null,
+    
+primary key (proveedor_id_proveedor, insumo_id_insumo),
+    
+foreign key (proveedor_id_proveedor) references proveedor(id_proveedor),
+    
+foreign key (insumo_id_insumo) references insumo(id_insumo)
+
+);
