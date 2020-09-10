@@ -50,8 +50,7 @@ insert into proveedor values
     (777777777, "Arriaga Autopartes", "Componentes varios"),
     (888888888, "Bergandi motors inc", "proveedor de motores"),
     (999999999, "Allegue inc", ""),
-    (000000000, "Moliterno", "");
-    
+    (100000000, "Moliterno", "");
 -- ********* insumo **************
 
 insert into insumo values
@@ -199,12 +198,12 @@ insert into proveedor_detalle_insumo values
     (999999999,26,183),
     (999999999,27,186),
     (999999999,28,185),
-    (000000000,29,182),
-    (000000000,30,100),
-    (000000000,31,101),
-    (000000000,32,102),
-    (000000000,33,103);
-    
+    (100000000,29,182),
+    (100000000,30,100),
+    (100000000,31,101),
+    (100000000,32,102),
+    (100000000,33,103);
+
 -- *********pedido_del_modelo**************
 insert into pedido_del_modelo values
 	(1,001,3),

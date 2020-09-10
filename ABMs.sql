@@ -2,11 +2,17 @@
 DELIMITER |
 
 CREATE PROCEDURE abm_modelo (IN _id_modelo int, IN _nombre varchar(50), IN _descripcion varchar(100), IN accion varchar(10))
+-- ingresar id = 0, si se quiere utilizar el auto_incremento
   BEGIN
 
     CASE 	accion
-      WHEN 'alta' THEN 
+      WHEN 'alta' THEN
       insert into modelo values (_id_modelo,_nombre,_descripcion);
+      IF _id_modelo = 0 THEN
+		insert into modelo( nombre, descripcion) values (_nombre,_descripcion);
+      ELSE
+		insert into modelo values (_id_modelo,_nombre,_descripcion);
+	  END IF;
       WHEN 'baja' THEN 
       delete from modelo where id_modelo=_id_modelo;
       WHEN 'mod' THEN
@@ -18,18 +24,26 @@ CREATE PROCEDURE abm_modelo (IN _id_modelo int, IN _nombre varchar(50), IN _desc
   |
   
   call abm_modelo(5,"Emma","Infantil","alta");
+  call abm_modelo(0, "Uso de IF ", "Utiliza el Auto incremento", "alta");
   call abm_modelo(5,"Emma2","Version 2","mod");
-  call abm_modelo(5,"","","baja");
+  call abm_modelo(10,"","","baja");
+  
   
   -- ****************** ABM linea_montaje ***************************--
   
   DELIMITER |
   
   CREATE PROCEDURE abm_linea_montaje(IN _id_linea int, IN _modelo_id_modelo int, IN _produccion_mes int, IN accion varchar(10)) -- acciones posibles "alta", "baja", "mod"
+  -- ingresar id = 0, si se quiere utilizar el auto_incremento
   BEGIN
-	CASE accion
-		WHEN "alta" THEN 
-			insert into linea_montaje values (_id_linea, _modelo_id_modelo, _produccion_mes);
+
+    CASE 	accion
+      WHEN 'alta' THEN
+      IF _id_linea = 0 THEN
+		insert into linea_montaje(modelo_id_modelo, produccion_mes) values (_modelo_id_modelo, _produccion_mes);
+      ELSE
+		insert into linea_montaje values (_id_linea, _modelo_id_modelo, _produccion_mes);
+	  END IF;
 		WHEN "baja" THEN
 			delete from linea_montaje WHERE id_linea=_id_linea;
 		WHEN "mod" THEN -- En este caso solo se puede modificar la columna que no es clave (produccion_mes), cualquier otro intento dara error
@@ -41,7 +55,8 @@ END
 |
 
 
-call abm_linea_montaje(3,1,50,"alta");		
+call abm_linea_montaje(3,1,50,"alta");
+call abm_linea_montaje(0,2,50,"alta"); -- USO DEL AUTO_INCREMENTO		
 call abm_linea_montaje(3,1,100,"mod");
 call abm_linea_montaje(3,0,0,"baja");		
 		
@@ -53,7 +68,11 @@ call abm_linea_montaje(3,0,0,"baja");
   BEGIN
 	CASE accion
 		WHEN "alta" THEN 
+        IF _id_tarea = 0 THEN -- ingresar id = 0, si se quiere utilizar el auto_incremento
+			insert into tarea(nombre, descripcion) values (_nombre, _descripcion);
+            ELSE
 			insert into tarea values (_id_tarea, _nombre, _descripcion);
+		END IF;
 		WHEN "baja" THEN
 			delete from tarea WHERE id_tarea=_id_tarea;
 		WHEN "mod" THEN 
@@ -79,7 +98,11 @@ call abm_tarea(6,"","","baja");
   BEGIN
 	CASE accion
 		WHEN "alta" THEN 
+        IF _cuit = 0 THEN 			-- ingresar id = 0, si se quiere utilizar el auto_incremento
+			insert into proveedor(nombre, descripcion) values (_nombre, _descripcion);
+            ELSE
 			insert into proveedor values (_cuit, _nombre, _descripcion);
+		END IF;
 		WHEN "baja" THEN
 			delete from proveedor WHERE cuit=_cuit;
 		WHEN "mod" THEN 
@@ -105,7 +128,11 @@ call abm_proveedor(12345678,"","","baja");
   BEGIN
 	CASE accion
 		WHEN "alta" THEN 
+        IF _id_insumo = 0 THEN 			-- ingresar id = 0, si se quiere utilizar el auto_incremento
+			insert into insumo(nombre, descripcion) values (_nombre, _descripcion);
+            ELSE
 			insert into insumo values (_id_insumo, _nombre, _descripcion);
+		END IF;
 		WHEN "baja" THEN
 			delete from insumo WHERE id_insumo=_id_insumo;
 		WHEN "mod" THEN 
@@ -131,7 +158,11 @@ call abm_insumo(39,"","","baja");
   BEGIN
 	CASE accion
 		WHEN "alta" THEN 
+        IF _id_concesionaria = 0 THEN 			-- ingresar id = 0, si se quiere utilizar el auto_incremento
+			insert into concesionaria(nombre) values (_nombre);
+            ELSE
 			insert into concesionaria values (_id_concesionaria, _nombre);
+		END IF;
 		WHEN "baja" THEN
 			delete from concesionaria WHERE id_concesionaria=_id_concesionaria;
 		WHEN "mod" THEN 
@@ -156,11 +187,15 @@ call abm_concesionaria(399,"","baja");
 
  DELIMITER |
   
-  CREATE PROCEDURE abm_pedido(IN _id_pedido int, IN _concesionaria_id_concesionaria int, IN _fecha_pedido date, IN _fecha_entrega date, IN accion varchar(10)) -- acciones posibles "alta", "baja", "mod"
-  BEGIN
+CREATE PROCEDURE abm_pedido(IN _id_pedido int, IN _concesionaria_id_concesionaria int, IN _fecha_pedido date, IN _fecha_entrega date, IN accion varchar(10)) -- acciones posibles "alta", "baja", "mod"
+BEGIN
 	CASE accion
 		WHEN "alta" THEN 
+        IF _id_pedido = 0 THEN 			-- ingresar id = 0, si se quiere utilizar el auto_incremento
+			insert into pedido(concesionaria_id_concesionaria, fecha_pedido, fecha_entrega) values (_concesionaria_id_concesionaria, _fecha_pedido, _fecha_entrega);
+            ELSE
 			insert into pedido values (_id_pedido, _concesionaria_id_concesionaria, _fecha_pedido, _fecha_entrega);
+		END IF;
 		WHEN "baja" THEN
 			delete from pedido WHERE id_pedido=_id_pedido;
 		WHEN "mod" THEN -- En este caso solo se pueden modificar las columnas que no son clave (fecha_pedido y fecha_entrega), cualquier otro intento dara error
@@ -187,7 +222,11 @@ call abm_pedido(4,127,'','',"baja");
   BEGIN
 	CASE accion
 		WHEN "alta" THEN 
+        IF _id_chasis = 0 THEN 			-- ingresar id = 0, si se quiere utilizar el auto_incremento
+			insert into vehiculo(modelo_id_modelo, pedido_id_pedido) values (_modelo_id_modelo, _pedido_id_pedido);
+            ELSE
 			insert into vehiculo values (_id_chasis, _modelo_id_modelo, _pedido_id_pedido);
+		END IF;
 		WHEN "baja" THEN
 			delete from vehiculo WHERE id_chasis=_id_chasis;
 		WHEN "mod" THEN 
