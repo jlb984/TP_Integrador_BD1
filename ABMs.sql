@@ -1,3 +1,45 @@
+
+-- ********************** ABM MODELO 2 ***********************
+-- La diferencia de este abm con el otro es que tiene una variable de salida que indica si se agregó  o no .
+-- Si el modelo no se agregó es porque ya existe el Modelo. (valida si está repetido )
+
+DELIMITER |
+
+
+CREATE  PROCEDURE `abm_modelo2`(IN _id_modelo int, IN _nombre varchar(50), IN _descripcion varchar(100),
+ IN accion varchar(10),out _respuesta varchar(45))
+BEGIN
+
+    CASE 	accion
+      WHEN 'alta' THEN 
+        set @repetido =0 ;
+	Select count(*) into @repetido from modelo where nombre= _nombre;
+        if @repetido =0 then
+           insert into modelo values (_id_modelo,_nombre,_descripcion);
+           set _respuesta ='Modelo creado con exito!';
+         else
+         set _respuesta='Modelo repetido';
+         end if;
+         
+      WHEN 'baja' THEN 
+      delete from modelo where id_modelo=_id_modelo;
+      WHEN 'mod' THEN
+      update modelo set
+		nombre=_nombre, descripcion=_descripcion where id_modelo=_id_modelo;
+    END CASE;
+    select * from modelo;
+  END;
+
+set @_respuesta= 0 ;
+call abm_modelo(3,'Laura','Camioneta 4x4','alta',@_respuesta);
+
+call abm_modelo(3,'Laura','otro','alta',@_respuesta);
+
+call abm_modelo(4,'Marcos',' minicoper','alta',@_respuesta);
+Select @_respuesta;
+call abm_modelo(5,'Juan',' minicoper','alta',@_respuesta);
+Select @_respuesta;
+
 -- ****************** ABM modelos ***************************--
 DELIMITER |
 
