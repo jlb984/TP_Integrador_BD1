@@ -49,8 +49,8 @@ DECLARE conteo INT;
 
 	-- Aca loopeo para hacer N inserts.
 	WHILE 	conteo < nCantidadDetalle DO
-
-	insert into vehiculo(modelo_id_modelo, pedido_id_pedido) values (_modelo_id_modelo, _id_pedido);
+	SET idChasis= FLOOR(RAND() * 100000); -- genera id aleatorio entre 0 y 100.000
+	insert into vehiculo values (idChasis,_modelo_id_modelo, _id_pedido);
 
 SET conteo = conteo  +1;
 
@@ -79,18 +79,19 @@ left join estacion_vehiculo ev on v.id_chasis=ev.vehiculo_id_chasis
 where estacion_trabajo_id_estacion is null;
 
 -- creamos un pedido nuevo
-call abm_pedido(4, 127, '2020-10-9','2020-10-30',"alta",@_respuesta);
+call abm_pedido(6, 127, '2020-10-9','2020-10-30',"alta",@_respuesta);
 Select @_respuesta;
-insert into pedido_del_modelo values (4, 1, 2);
-insert into pedido_del_modelo values (4, 2, 2);
-CALL `terminal_automotriz`.`mostrar_pedido`(4);
+insert into pedido_del_modelo values (6, 1, 3);
+insert into pedido_del_modelo values (6, 2, 4);
+CALL `terminal_automotriz`.`mostrar_pedido`(6);
+
 -- listar pedidos
 
 select id_pedido, concesionaria_id_concesionaria, fecha_pedido, modelo_id_modelo, cantidad from pedido p
 inner join pedido_del_modelo on id_pedido=pedido_id_pedido;
 
-call cargar_pedido(4);
-
+call cargar_pedido(6, @_mensaje);
+select @_mensaje;
 -- listar vehiculos sin fabricar
 
 select * from vehiculo;

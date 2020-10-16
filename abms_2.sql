@@ -44,17 +44,17 @@ BEGIN
   END
   
   |
-call abm_modelo(5,"Emma","Infantil","alta",@_respuesta);
+call abm_modelo(5,"Emma","Infantil","alta",@_respuesta); --Modelo o id repetido
 Select @_respuesta;
 call abm_modelo(0, "Uso de IF ", "Utiliza el Auto incremento", "alta",@_respuesta);
 Select @_respuesta;
 call abm_modelo(5,"Emma2","Version 2","mod",@_respuesta);
 Select @_respuesta;
-call abm_modelo(10,"","","baja",@_respuesta);  
+call abm_modelo(10,"","","baja",@_respuesta);  --modelo inexistente
 Select @_respuesta;
 call abm_modelo(4,'Marcos',' minicoper','alta',@_respuesta);
 Select @_respuesta;
-call abm_modelo(5,'Juan',' minicoper','alta',@_respuesta);
+call abm_modelo(5,'Juan',' minicoper','alta',@_respuesta); --Modelo o id repetido
 Select @_respuesta;
 
 -- ****************** ABM proveedor ***************************--
@@ -101,7 +101,7 @@ END
 
 call abm_proveedor(0,"juan", " Es un Proovedor repetido","alta",@_respuesta);
 Select @_respuesta; -- funcionó
-call abm_proveedor(546545650,"juan", " Es un Proovedor que no existe","baja",@_respuesta);
+call abm_proveedor(546545650,"juan", " Es un Proovedor que no existe","baja",@_respuesta); -- CUIT inexistente
 Select @_respuesta; -- funcionó
 
 -- ****************** ABM insumo ***************************--
@@ -145,6 +145,7 @@ END
 |
 call abm_insumo(2," CH22","limpieza aceite","alta",@_respuesta); -- id insumo repetido
 Select @_respuesta; -- funcionó
+
 
 -- ****************** ABM concesionaria ***************************--
   
