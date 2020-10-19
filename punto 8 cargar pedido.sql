@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+DELIMITER |
+>>>>>>> fb28f4db6129c3670e6a411046810dfc7533a2b5
 CREATE DEFINER=`root`@`localhost` PROCEDURE `cargar_pedido`(IN _id_pedido int,out _mensaje varchar(60))
 BEGIN
 
@@ -42,7 +46,11 @@ select count(*) into @auto_repetido from vehiculo where pedido_id_pedido = _id_p
 
 	-- Aca loopeo para hacer N inserts.
 	WHILE 	conteo < nCantidadDetalle and @auto_repetido =0 DO
+<<<<<<< HEAD
 SET idChasis= FLOOR(RAND() * 100000); -- genera id aleatorio entre 0 y 100.000
+=======
+	SET idChasis= FLOOR(RAND() * 100000); -- genera id aleatorio entre 0 y 100.000
+>>>>>>> fb28f4db6129c3670e6a411046810dfc7533a2b5
 	insert into vehiculo values (idChasis,_modelo_id_modelo, _id_pedido);
 	
 
@@ -56,4 +64,9 @@ SET conteo = conteo  +1;
 
     CLOSE curDetallePedido;
 
+<<<<<<< HEAD
 END
+=======
+END
+|
+>>>>>>> fb28f4db6129c3670e6a411046810dfc7533a2b5
