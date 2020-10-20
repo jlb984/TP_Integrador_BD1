@@ -65,3 +65,7 @@ CLOSE curReporte;
 select * from temp;
 truncate temp;
 END
+
+|
+select * from pedido;
+call reporte_vehiculos(3);

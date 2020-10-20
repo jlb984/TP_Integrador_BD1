@@ -1,3 +1,5 @@
+-- prociedimiento para listar pedido solicitado
+
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `mostrar_pedido`(IN _id_pedido int)
 BEGIN
@@ -7,7 +9,7 @@ BEGIN
   END$$
 DELIMITER ;
 
-
+-- Crea los vehiculos indicados en el pedido seleccionado, crea los id's correspondientes para cada chasis
 
 DELIMITER |
 
