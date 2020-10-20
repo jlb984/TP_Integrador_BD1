@@ -96,3 +96,12 @@ END$$
 
 DELIMITER ;
 
+call abm_pedido (9,127,'2020-02-09','2020-07-20','alta',@_respuesta);
+select @_respuesta;
+Insert into pedido_del_modelo values (9,2,35);
+
+call cargar_pedido2(9,@_mensaje);
+Select @_mensaje; 
+
+Select * from vehiculo where pedido_id_pedido= 9 ;
+Select count(*) pedido_id_pedido from vehiculo where pedido_id_pedido = 9 ;
