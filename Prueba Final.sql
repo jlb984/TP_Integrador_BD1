@@ -12,15 +12,15 @@ select @_respuesta;
 
 -- carga de datos en pedido
 
-insert into pedido_del_modelo values (10,1,2);
-insert into pedido_del_modelo values (10,2,3);
+insert into pedido_del_modelo values (10,1,37);
+insert into pedido_del_modelo values (10,2,37);
 
 select * from pedido
 inner join pedido_del_modelo on id_pedido=pedido_id_pedido
 where id_pedido=10;
 
 -- creacion de id's de vehiculos segun pedido
-CALL `terminal_automotriz`.`cargar_pedido`(10, @_mensaje);
+CALL `terminal_automotriz`.`cargar_pedidoXXX`(10, @_mensaje);
 select @_mensaje;
 
 select * from vehiculo where pedido_id_pedido=10;  -- muestro detalle del pedido con todos los id de chasis incluidos
