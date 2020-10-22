@@ -306,17 +306,17 @@ getDetalle: LOOP
 	SET conteo = 0;		-- control de cantidad de vehiculos cargados por linea
 	
 	WHILE 	conteo < nCantidadDetalle and @auto_repetido =0 DO -- Aca loopeo para hacer N inserts.
-		validaChasis: LOOP
+		valida_Chasis: LOOP
 			SET idChasis= FLOOR(RAND() * 100); -- genera id aleatorio entre 0 y 100.000
 			--  genero un loop nuevo con un cursor y recorro todo el listado de chasis existentes para asegurar que no exista el que acabo de generar
 			CALL validaChasis(idChasis, @_existe);
             IF (SELECT @_existe = 1) THEN
-				ITERATE validaChasis;
+				ITERATE valida_Chasis;
 			END IF;
             IF (SELECT @_existe = 0) THEN
-				LEAVE validaChasis;
+				LEAVE valida_Chasis;
 			END IF;
-		END LOOP validaChasis;
+		END LOOP valida_Chasis;
 		
 	insert into vehiculo values (idChasis,_modelo_id_modelo, _id_pedido);
 	
@@ -493,7 +493,6 @@ DECLARE nombre_est varchar(200);
 DECLARE estado varchar(200);
 
 
-    
 DECLARE curReporte
         CURSOR FOR
             SELECT ve.id_chasis, ve.modelo_id_modelo, count(id_chasis), es.ingreso, es.egreso 

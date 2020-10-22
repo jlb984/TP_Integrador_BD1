@@ -20,114 +20,115 @@ inner join pedido_del_modelo on id_pedido=pedido_id_pedido
 where id_pedido=10;
 
 -- creacion de id's de vehiculos segun pedido
-CALL `terminal_automotriz`.`cargar_pedidoXXX`(10, @_mensaje);
+CALL `terminal_automotriz`.`cargar_pedido`(10, @_mensaje);
 select @_mensaje;
 
 select * from vehiculo where pedido_id_pedido=10;  -- muestro detalle del pedido con todos los id de chasis incluidos
-
+select count(*) from vehiculo where id_chasis>0 and id_chasis<100 ;  -- muestro detalle del pedido con todos los id de chasis incluidos
+select * from vehiculo ;
 -- inicio un vehiculo en linea 1 (modelo id 1)
 
-CALL `terminal_automotriz`.`inicio_vehiculo`(62865, @cMensaje, @nResultado);
+CALL `terminal_automotriz`.`inicio_vehiculo`(27, @cMensaje, @nResultado);
 select @cMensaje, @nResultado;
 select * from vehiculo
 inner join estacion_vehiculo on vehiculo_id_chasis=id_chasis
-where id_chasis=62865;
+where id_chasis=27;
 
 
 
 -- inicio vehiculo en linea 2 (Modelo id 2)
 
-CALL `terminal_automotriz`.`inicio_vehiculo`(53416, @cMensaje, @nResultado);
+CALL `terminal_automotriz`.`inicio_vehiculo`(39, @cMensaje, @nResultado);
 select @cMensaje, @nResultado;
 select * from vehiculo
 inner join estacion_vehiculo on vehiculo_id_chasis=id_chasis
-where id_chasis=53416;
+where id_chasis=39;
 
 -- avanzo linea 1
 
-CALL `terminal_automotriz`.`avanzo_vehiculo`(62865, @cMensaje, @nResultado);
+CALL `terminal_automotriz`.`avanzo_vehiculo`(27, @cMensaje, @nResultado);
 select @cMensaje, @nResultado;
 select * from vehiculo
 inner join estacion_vehiculo on vehiculo_id_chasis=id_chasis
-where id_chasis=62865;
+where id_chasis=27;
 
 
 -- avanzo linea 2
 
-CALL `terminal_automotriz`.`avanzo_vehiculo`(53416, @cMensaje, @nResultado);
+CALL `terminal_automotriz`.`avanzo_vehiculo`(39, @cMensaje, @nResultado);
 select @cMensaje, @nResultado;
 select * from vehiculo
 inner join estacion_vehiculo on vehiculo_id_chasis=id_chasis
-where id_chasis=53416;
+where id_chasis=39;
 
 -- inicio un vehiculo en linea 1 (modelo id 1) //ya se encuentra vacia la primer estacion
 
-CALL `terminal_automotriz`.`inicio_vehiculo`(69500, @cMensaje, @nResultado);
+CALL `terminal_automotriz`.`inicio_vehiculo`(94, @cMensaje, @nResultado);
 select @cMensaje, @nResultado;
 select * from vehiculo
 inner join estacion_vehiculo on vehiculo_id_chasis=id_chasis
-where id_chasis=69500;
+where id_chasis=94;
 
 
--- intento avanza a siguiente estacion //esta ocupada
+-- intento avanzar a siguiente estacion //esta ocupada
 
-CALL `terminal_automotriz`.`avanzo_vehiculo`(69500, @cMensaje, @nResultado);
+CALL `terminal_automotriz`.`avanzo_vehiculo`(94, @cMensaje, @nResultado);
 select @cMensaje, @nResultado;
 select * from vehiculo
 inner join estacion_vehiculo on vehiculo_id_chasis=id_chasis
-where id_chasis=69500;
+where id_chasis=94;
 
--- avanzo primer vehiculo hasta final de linea // repetir 3 veces el procedimiento
+-- avanzo primer vehiculo hasta final de linea y lo finalizo// repetir 4 veces el procedimiento
 
-CALL `terminal_automotriz`.`avanzo_vehiculo`(62865, @cMensaje, @nResultado);
+CALL `terminal_automotriz`.`avanzo_vehiculo`(27, @cMensaje, @nResultado);
 select @cMensaje, @nResultado;
 select * from vehiculo
 inner join estacion_vehiculo on vehiculo_id_chasis=id_chasis
-where id_chasis=62865;
+where id_chasis=27;
 
--- estando en final de linea intento hacerlo avanzar // repito el procedimiento por 4° vez
+-- estando finalizado intento hacerlo avanzar // repito el procedimiento por 5° vez
 
 
 
 
 -- inicio vehiculo en linea 2 (Modelo id 2)  //ya se encuentra vacia la primer estacion
 
-CALL `terminal_automotriz`.`inicio_vehiculo`(58905, @cMensaje, @nResultado);
+CALL `terminal_automotriz`.`inicio_vehiculo`(25, @cMensaje, @nResultado);
 select @cMensaje, @nResultado;
 select * from vehiculo
 inner join estacion_vehiculo on vehiculo_id_chasis=id_chasis
-where id_chasis=58905;
+where id_chasis=25;
 
 -- Intento iniciar otro vehiculo en linea 2  //primer estacion todavia esta ocupada
 
-CALL `terminal_automotriz`.`inicio_vehiculo`(86026, @cMensaje, @nResultado);
+CALL `terminal_automotriz`.`inicio_vehiculo`(41, @cMensaje, @nResultado);
 select @cMensaje, @nResultado;
 select * from vehiculo
 inner join estacion_vehiculo on vehiculo_id_chasis=id_chasis
-where id_chasis=86026;
+where id_chasis=41;
 
--- avanzo primer vehiculo hasta final de linea 2// repetir 4 veces el procedimiento
+-- avanzo primer vehiculo hasta final de linea 2 sin finalizarlo// repetir 3 veces el procedimiento
 
-CALL `terminal_automotriz`.`avanzo_vehiculo`(53416, @cMensaje, @nResultado);
+CALL `terminal_automotriz`.`avanzo_vehiculo`(39, @cMensaje, @nResultado);
 select @cMensaje, @nResultado;
 select * from vehiculo
 inner join estacion_vehiculo on vehiculo_id_chasis=id_chasis
-where id_chasis=53416;
+where id_chasis=39;
 
 -- avanzo segundo vehiculo hasta estacion 8  de linea 2// repetir 2 veces el procedimiento
-CALL `terminal_automotriz`.`avanzo_vehiculo`(58905, @cMensaje, @nResultado);
+CALL `terminal_automotriz`.`avanzo_vehiculo`(25, @cMensaje, @nResultado);
 select @cMensaje, @nResultado;
 select * from vehiculo
 inner join estacion_vehiculo on vehiculo_id_chasis=id_chasis
-where id_chasis=58905;
+where id_chasis=25;
 
 -- inicio ultimo vehiculo de linea 2
 
-CALL `terminal_automotriz`.`inicio_vehiculo`(86026, @cMensaje, @nResultado);
+CALL `terminal_automotriz`.`inicio_vehiculo`(41, @cMensaje, @nResultado);
 select @cMensaje, @nResultado;
 select * from vehiculo
 inner join estacion_vehiculo on vehiculo_id_chasis=id_chasis
-where id_chasis=86026;
+where id_chasis=41;
 
 
 -- reporte de estado pedido 10
